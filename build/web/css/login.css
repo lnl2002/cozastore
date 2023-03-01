@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css?family=Sofia');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    background: url('../images/png1.png')no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+.form-box {
+    position: relative;
+    width: 500px;
+    height: 550px;
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.form-register {
+    transition: .3s ease;
+    /* display: none; */
+}
+
+
+
+
+h2{
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+.inputbox{
+    position: relative;
+    margin: 30px 0;
+    width: 310px;
+    border-bottom: 2px solid #fff;
+}
+.inputbox label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1em;
+    pointer-events: none;
+    transition: .5s;
+}
+input:focus ~ label,
+input:valid ~ label
+{
+    top:-5px;
+}
+.inputbox input{
+    width: 100%;
+    height: 50px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 0 35px 0 5px;
+    color: #fff;
+}
+
+.inputbox ion-icon{
+    position: absolute;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    top: 20px;
+}
+.forget{
+    margin: -15px 0 15px;
+    font-size: .9em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+.forget label input{
+    margin-right: 3px;
+}
+.forget label a{
+    color: #fff;
+    text-decoration: none;
+}
+.forget label a:hover{
+    text-decoration: underline;
+}
+button{
+    position: relative;
+    width: 100%;
+    height: 40px;
+    min-width: 300px;
+    border-radius: 40px;
+    background-color: #fff;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: .5s;
+}
+button:hover{
+    background: var(--clr);
+    color: var(--clr);
+    letter-spacing: 0.25em;
+    box-shadow: 0 0 35px var(--clr);
+}
+button:before
+{
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background-color: #27282c;
+    border-radius: 40px;
+
+}
+
+button span{
+    position: relative;
+    z-index: 1;
+}
+
+button i{
+    position: absolute;
+    inset: 0;
+    display: block;
+}
+
+button i::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 80%;
+    width: 10px;
+    height: 4px;
+    background-color: #27282c;
+    transform: translateX(-50%) skew(325deg);
+    transition: .5s;
+}
+button:hover i::before{
+    width: 20px;
+    left: 20%;
+}
+
+button i::after{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 10px;
+    height: 4px;
+    background-color: #27282c;
+    transform: translateX(-50%) skew(325deg);
+    transition: .5s;
+}
+button:hover i::after{
+    width: 20px;
+    left: 80%;
+}
+
+.register{
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+.register p a{
+    text-decoration: none;
+    color:  #fff;
+    font-weight: 600;
+}
+.register p a:hover{
+    text-decoration: underline;
+}
+
+/* toast */
+.toast{
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    
+}
+
+.toast-message{
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 2px;
+    padding: 10px 0px;
+    min-width: 350px;
+    max-width: 400px;
+    animation: slide ease .3s, fadeOut linear 1s 3s forwards;
+}
+
+.toast-message + .toast-message{
+    margin-top: 10px;
+}
+
+.toast-icon,
+.toast-close {
+    font-size: 24px;
+    padding: 0 16px;
+}
+
+.toast-body{
+    flex-grow: 1;
+}
+
+.title{
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.message{
+    font-size: 16px;
+    opacity: 0.8;
+    color: #000;
+}
+
+.toast-close {
+    color: #000;
+    cursor: pointer;
+}
+
+.toast-success {
+    border-left: 4px solid rgb(71, 240, 71);
+    color: rgb(71, 240, 71);
+}
+
+.toast-failure {
+    border-left: 4px solid red;
+    color: red;
+}
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+    to {
+        opacity: 1;      
+        transform: translateX(0);
+    }
+}
+@keyframes fadeOut {
+    to{
+        opacity: 0;
+    }
+}
