@@ -4,7 +4,6 @@
  */
 package dal;
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,11 +47,12 @@ public class AccountDAO extends DBContext {
             st.setString(1, username);
             st.setString(2, password);
             st.executeUpdate();
-        } catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
-    public boolean isExistAccount(String username){
+
+    public boolean isExistAccount(String username) {
         String sql = "select * from Accounts where userName = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -66,9 +66,9 @@ public class AccountDAO extends DBContext {
         }
         return false;
     }
-   
-    public int getAccountIdByUsername(String username){
-       String sql = "select * from Accounts where userName = ?";
+
+    public int getAccountIdByUsername(String username) {
+        String sql = "select * from Accounts where userName = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, username);
@@ -80,5 +80,19 @@ public class AccountDAO extends DBContext {
             System.out.println(e);
         }
         return 0;
+    }
+
+    public void updatePassword(String username, String password) {
+        String sql = "UPDATE [dbo].[Accounts]\n"
+                + "   SET [password] = ?\n"
+                + " WHERE username = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, password);
+            st.setString(2, username);
+            st.executeUpdate();
+        } catch(SQLException e){
+            System.out.println(e);
+        }
     }
 }

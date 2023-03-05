@@ -55,7 +55,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.jsp">Home</a>
+								<a href="index">Home</a>
 								
 							</li>
 
@@ -113,7 +113,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="index"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -138,9 +138,9 @@
 		<div class="menu-mobile">
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.jsp">Home</a>
+					<a href="index">Home</a>
 					<ul class="sub-menu-m">
-						<li><a href="index.jsp">Homepage 1</a></li>
+						<li><a href="index">Homepage 1</a></li>
 						<li><a href="home-02.jsp">Homepage 2</a></li>
 						<li><a href="home-03.jsp">Homepage 3</a></li>
 					</ul>
@@ -204,13 +204,13 @@
 			<div class="sidebar-content flex-w w-full p-lr-65 js-pscroll">
 				<ul class="sidebar-link w-full">
 					<li class="p-b-13">
-						<a href="index.jsp" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="index" class="stext-102 cl2 hov-cl1 trans-04">
 							Home
 						</a>
 					</li>
                                         
                                         <li class="p-b-13">
-						<a href="profile.jsp" class="stext-102 cl2 hov-cl1 trans-04">
+						<a href="profile" class="stext-102 cl2 hov-cl1 trans-04">
 							Profile
 						</a>
 					</li>

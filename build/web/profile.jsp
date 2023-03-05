@@ -35,6 +35,31 @@
         <link rel="stylesheet" type="text/css" href="css/util.css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/profile.css">
+        <style>
+            .profile:hover {
+                height: 550px;
+                width: 350px;
+                border-radius: 5px;
+                box-shadow: 0px 1px 35px 0px rgba(0,0,0,0.3);
+            }
+            .content .buttons {
+                background-color: #fff;
+                width: 150px;
+                height: 40px;
+                display: block;
+                margin: 0 auto;
+                margin-top: 10px;
+                border: none;
+                outline: none;
+                line-height: 40px;
+                font-weight: 500;
+                border-radius: 5px;
+                transition: all .3s ;
+            }
+            .buttons:hover{
+                transform: scale(0.95);
+            }
+        </style>
         <!--===============================================================================================-->
     </head>
     <body class="animsition">
@@ -55,7 +80,7 @@
                                 Help & FAQs
                             </a>
 
-                            <a href="#" class="flex-c-m trans-04 p-lr-25">
+                            <a href="profile" class="flex-c-m trans-04 p-lr-25">
                                 My Account
                             </a>
 
@@ -82,7 +107,7 @@
                         <div class="menu-desktop">
                             <ul class="main-menu">
                                 <li>
-                                    <a href="index.jsp">Home</a>
+                                    <a href="index">Home</a>
 
                                 </li>
 
@@ -127,7 +152,7 @@
             <div class="wrap-header-mobile">
                 <!-- Logo moblie -->		
                 <div class="logo-mobile">
-                    <a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+                    <a href="index"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
                 </div>
 
                 <!-- Icon header -->
@@ -180,7 +205,7 @@
 
                 <ul class="main-menu-m">
                     <li>
-                        <a href="index.jsp">Home</a>
+                        <a href="index">Home</a>
 
                         <span class="arrow-main-menu-m">
                             <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -307,7 +332,9 @@
             </div>
         </div>
         <div class="profile-header">
-            <h1>User Profile</h1>
+            <div>
+                <h1>User Profile</h1>
+            </div>
         </div>
         <div class="profile">
             <div class="wrapper">
@@ -315,15 +342,20 @@
                     <img class="img-profile" src="images/profile-default.png" alt="">
                 </a>
                 <div class="text">
-                    <div class="title">Andrew Neil</div>
-                    <div class="place">Surkhet, Nepal</div>
+                    <div class="title">Name: ${requestScope.name}</div>
+                    <div class="place">Birth: ${requestScope.birth}</div>
                 </div>
                 <div class="content">
-                    <p>User Interface Designer and front-end developer</p>
+                    <p>Phone ${requestScope.phone}</p>
+                    <p>Address: ${requestScope.address}</p>
+                    <div class="buttons">
+                        <button><a href="change-password.jsp">Change password</a></button>
+                    </div>
                 </div>
                 <div class="icons">
                     <li><a href=""><ion-icon name="cloud-upload-outline"></ion-icon></a></li>
                 </div>
+
             </div>
         </div>	
 
@@ -495,31 +527,31 @@
         <!--===============================================================================================-->
         <script src="vendor/select2/select2.min.js"></script>
         <script>
-    $(".js-select2").each(function () {
-        $(this).select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $(this).next('.dropDownSelect2')
-        });
-    })
+            $(".js-select2").each(function () {
+                $(this).select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $(this).next('.dropDownSelect2')
+                });
+            })
         </script>
         <!--===============================================================================================-->
         <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
         <!--===============================================================================================-->
         <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
         <script>
-    $('.js-pscroll').each(function () {
-        $(this).css('position', 'relative');
-        $(this).css('overflow', 'hidden');
-        var ps = new PerfectScrollbar(this, {
-            wheelSpeed: 1,
-            scrollingThreshold: 1000,
-            wheelPropagation: false,
-        });
+            $('.js-pscroll').each(function () {
+                $(this).css('position', 'relative');
+                $(this).css('overflow', 'hidden');
+                var ps = new PerfectScrollbar(this, {
+                    wheelSpeed: 1,
+                    scrollingThreshold: 1000,
+                    wheelPropagation: false,
+                });
 
-        $(window).on('resize', function () {
-            ps.update();
-        })
-    });
+                $(window).on('resize', function () {
+                    ps.update();
+                })
+            });
         </script>
         <!--===============================================================================================-->
         <script src="js/main.js"></script>

@@ -6,6 +6,7 @@ package dal;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Customers;
 
@@ -36,5 +37,29 @@ public class CustomerDAO extends DBContext {
             System.out.println(e);
         }
     }
+    public Customers getCustomerByAccountID(int accountId){
+        String sql = "select * from customers where accountid = ?";
+        Customers customer = new Customers();
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, accountId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {                
+                customer.setAccountID(accountId);
+                customer.setAddress(rs.getString("address"));
+                customer.setBirth(rs.getDate("birth"));
+                customer.setName(rs.getString("name"));
+                customer.setPhone(rs.getString("phone"));
+            }
+        } catch(SQLException e){
+            System.out.println(e);
+        }
+        return customer;
+    }
     
+    public static void main(String[] args) {
+        CustomerDAO d = new CustomerDAO();
+        Customers customers = d.getCustomerByAccountID(1);
+        System.out.println(customers.getName());
+    }
 }

@@ -47,7 +47,7 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a href="profile" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
 
@@ -74,7 +74,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.jsp">Home</a>
+								<a href="index">Home</a>
 								
 							</li>
 
@@ -119,7 +119,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href=""><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -172,7 +172,7 @@
 
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.jsp">Home</a>
+					<a href="index">Home</a>
 					
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
