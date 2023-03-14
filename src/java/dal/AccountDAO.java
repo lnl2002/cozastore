@@ -31,10 +31,7 @@ public class AccountDAO extends DBContext {
         return false;
     }
 
-    public static void main(String[] args) {
-        AccountDAO d = new AccountDAO();
-        System.out.println(d.isAccount("laingoclam3112@gmail.com", "12"));
-    }
+    
 
     public void insertAccount(String username, String password) {
         String sql = "INSERT INTO [dbo].[Accounts]\n"
@@ -94,5 +91,25 @@ public class AccountDAO extends DBContext {
         } catch(SQLException e){
             System.out.println(e);
         }
+    }
+    
+    public boolean isAdmin(String username,String password){
+        String sql = "select * from Accounts where userName = ? and password =?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, username);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
+            while (rs.next() && rs.getString("role").equals("1")) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        AccountDAO d = new AccountDAO();
+        System.out.println(d.isAdmin("laingoclam3112@gmail.com", "lnl3112"));
     }
 }

@@ -129,13 +129,13 @@
     /*==================================================================
     [ Isotope ]*/
     var $topeContainer = $('.isotope-grid');
-    var $filter = $('.filter-tope-group');
+    var $filter = $('.filter-tope-group');  // tao category de loc
 
     // filter items on button click
     $filter.each(function () {
         $filter.on('click', 'button', function () {
-            var filterValue = $(this).attr('data-filter');
-            $topeContainer.isotope({filter: filterValue});
+            var filterValue = $(this).attr('data-filter');  // loc cac sp co data-filter - category name 
+            $topeContainer.isotope({filter: filterValue}); 
         });
         
     });

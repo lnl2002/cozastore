@@ -25,7 +25,7 @@ import model.Accounts;
  *
  * @author Nhat Anh
  */
-@WebFilter(filterName="loginFilter", urlPatterns={"/profile", "/profile.jsp", "/shoping-cart", "/shoping-cart.jsp", "/change", "/change-password.jsp"})
+@WebFilter(filterName="loginFilter", urlPatterns={"/profile", "/profile.jsp", "/shopingcart", "/shoping-cart.jsp", "/change", "/change-password.jsp", "/datatables.jsp", "/tableproduct", "/updatecategory", "/updateproduct", "/addcategory", "/addproduct", "/delete", "/deletecategory"})
 public class loginFilter implements Filter {
 
     private static final boolean debug = true;

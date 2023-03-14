@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Nhat Anh
@@ -17,10 +19,12 @@ public class Products {
     int categoryId;
     String image;
     String categoryName;
+    Date dateRelease;
+    String color;
     public Products() {
     }
 
-    public Products(int productId, String nameProduct, int quantity, double price, String descript, int categoryId, String image,String categoryName) {
+    public Products(int productId, String nameProduct, int quantity, double price, String descript, int categoryId, String image,String categoryName,Date dateRelease,String color) {
         this.productId = productId;
         this.nameProduct = nameProduct;
         this.quantity = quantity;
@@ -29,6 +33,8 @@ public class Products {
         this.categoryId = categoryId;
         this.image = image;
         this.categoryName = categoryName;
+        this.dateRelease = dateRelease;
+        this.color = color;
     }
 
     public int getProductId() {
@@ -87,12 +93,28 @@ public class Products {
         this.image = image;
     }
 
+    public Date getDateRelease() {
+        return dateRelease;
+    }
+
+    public void setDateRelease(Date dateRelease) {
+        this.dateRelease = dateRelease;
+    }
+
     public String getCategoryName() {
         return categoryName;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
     
 }

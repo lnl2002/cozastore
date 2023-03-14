@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Random;
 
 /**
@@ -40,13 +42,18 @@ public class Categories {
     }
 
     public static void main(String[] args) {
+        
         Random rand = new Random();
         for (int i = 17; i <= 83; i++) {
+            double random = Math.random() * 999 + 1.0;
+            NumberFormat formatter = new DecimalFormat("##.##");
+            
+          
             System.out.println("INSERT INTO [dbo].[Products]([nameProduct],[quantity],[price],[descript],[categoryID],[image]) \n"
                     + "VALUES ('Product " 
                     + i 
                     + "', 1000, "
-                    +rand.nextDouble((1000-10)+1)+10 
+                    +formatter.format(random)
                     +",'Product "
                     +i+" ',1,'images/product-"
                     + i

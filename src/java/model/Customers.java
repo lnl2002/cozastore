@@ -16,16 +16,17 @@ public class Customers {
     private String phone;
     private String address;
     private int accountID;
-
+    private int customerId;
     public Customers() {
     }
 
-    public Customers(String name, Date birth, String phone, String address, int accountID) {
+    public Customers(String name, Date birth, String phone, String address, int accountID,int customerId) {
         this.name = name;
         this.birth = birth;
         this.phone = phone;
         this.address = address;
         this.accountID = accountID;
+        this.customerId =customerId;
     }
 
     public String getName() {
@@ -66,6 +67,14 @@ public class Customers {
 
     public void setAccountID(int accountID) {
         this.accountID = accountID;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
     
     

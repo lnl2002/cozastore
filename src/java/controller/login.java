@@ -6,6 +6,8 @@
 package controller;
 
 import dal.AccountDAO;
+import dal.CartDAO;
+import dal.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +16,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Accounts;
+import model.Cart;
+import model.Customers;
 
 /**
  *
@@ -75,13 +80,27 @@ public class login extends HttpServlet {
         String password = request.getParameter("password");
         HttpSession session = request.getSession();
         AccountDAO d = new AccountDAO();
+        CustomerDAO cusDAO = new CustomerDAO();
+        CartDAO cartDAO = new CartDAO();
         if(d.isAccount(username, password)){
-            Accounts account = new Accounts(0, username, password);
-            session.setAttribute("account", account);
-            request.setAttribute("data", "Log out");
-            request.setAttribute("display", "none");
-            
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            if(!d.isAdmin(username, password)){
+                Accounts account = new Accounts(d.getAccountIdByUsername(username), username, password);
+                session.setAttribute("account", account);
+                session.setAttribute("username", account.getUserName());
+                Customers customer = cusDAO.getCustomerByAccountID(account.getAccountID());
+                int cartId = cartDAO.getCartIdByAccountId(account.getAccountID());
+                List<Cart> cart = cartDAO.getListProductById(cartId);
+                session.setAttribute("cartId", cartId);
+                session.setAttribute("customer", customer);
+              
+                response.sendRedirect("index");
+            }
+            else if(d.isAdmin(username, password)){
+                Accounts account = new Accounts(d.getAccountIdByUsername(username), username, password);
+                session.setAttribute("account", account);
+                session.setAttribute("username", account.getUserName());
+                response.sendRedirect("tableproduct");
+            }
         } else {
             request.setAttribute("fail", "flex");
             request.getRequestDispatcher("login.jsp").forward(request, response);

@@ -39,27 +39,29 @@ public class CustomerDAO extends DBContext {
     }
     public Customers getCustomerByAccountID(int accountId){
         String sql = "select * from customers where accountid = ?";
-        Customers customer = new Customers();
+        
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, accountId);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {                
+                Customers customer = new Customers();
+                customer.setCustomerId(rs.getInt("customerId"));
                 customer.setAccountID(accountId);
                 customer.setAddress(rs.getString("address"));
                 customer.setBirth(rs.getDate("birth"));
                 customer.setName(rs.getString("name"));
                 customer.setPhone(rs.getString("phone"));
+                return customer;
             }
         } catch(SQLException e){
             System.out.println(e);
         }
-        return customer;
+        return null;
     }
-    
     public static void main(String[] args) {
         CustomerDAO d = new CustomerDAO();
         Customers customers = d.getCustomerByAccountID(1);
-        System.out.println(customers.getName());
+        System.out.println(customers.getCustomerId());
     }
 }

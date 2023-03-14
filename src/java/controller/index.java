@@ -5,6 +5,8 @@
 
 package controller;
 
+import dal.OrderDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +15,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import model.Accounts;
+import model.Products;
 
 /**
  *
@@ -62,7 +66,31 @@ public class index extends HttpServlet {
         if(account != null){
             request.setAttribute("data", "Log out");
             request.setAttribute("display", "none");
-        } 
+        }
+        //paging
+        ProductDAO d = new ProductDAO();
+        OrderDAO orderDAO = new OrderDAO();
+        List<Products> product = d.listNew();
+        List<Products> bestSeller = orderDAO.getBestSeller();
+        int page, numberPerPage=12;
+        int size = product.size();
+        int number = (size%12==0?(size/12):((size/12)+1)); //number of page
+        
+        String xPage=request.getParameter("page");
+        if(xPage == null){
+            page = 1;
+        } else {
+            page = Integer.parseInt(xPage);
+        }
+        int start = (page-1)*numberPerPage;
+        int end = Math.min(page*numberPerPage, size);
+        
+        List<Products> list = d.getAllPaging(product, start, end);
+        
+        request.setAttribute("bestseller", bestSeller);
+        request.setAttribute("products", list);
+        request.setAttribute("page", page);
+        request.setAttribute("number", number);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     } 
 

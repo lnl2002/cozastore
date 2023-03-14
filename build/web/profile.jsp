@@ -112,11 +112,11 @@
                                 </li>
 
                                 <li>
-                                    <a href="product.jsp">Shop</a>
+                                    <a href="product">Shop</a>
                                 </li>
 
                                 <li class="label1" data-label1="hot">
-                                    <a href="shoping-cart.jsp">Shoping cart</a>
+                                    <a href="shopingcart">Shoping cart</a>
                                 </li>
 
 
@@ -213,11 +213,11 @@
                     </li>
 
                     <li>
-                        <a href="product.jsp">Shop</a>
+                        <a href="product">Shop</a>
                     </li>
 
                     <li>
-                        <a href="shoping-cart.jsp" class="label1 rs1" >Shoping cart</a>
+                        <a href="shopingcart" class="label1 rs1" >Shoping cart</a>
                     </li>
 
                     <li>
@@ -232,19 +232,20 @@
 
             <!-- Modal Search -->
             <div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-                <div class="container-search-header">
-                    <button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-                        <img src="images/icons/icon-close2.png" alt="CLOSE">
-                    </button>
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="images/icons/icon-close2.png" alt="CLOSE">
+				</button>
 
-                    <form class="wrap-search-header flex-w p-l-15">
-                        <button class="flex-c-m trans-04">
-                            <i class="zmdi zmdi-search"></i>
-                        </button>
-                        <input class="plh3" type="text" name="search" placeholder="Search...">
-                    </form>
-                </div>
-            </div>
+                                <form action="search2" class="wrap-search-header flex-w p-l-15">
+                                    <button type="submit"  class="flex-c-m trans-04">
+                                        <i class="zmdi zmdi-search"></i>
+                                    </button>
+                                    <input class="plh3" type="text" name="search" required placeholder="Search...">
+				</form>
+			</div>
+		</div>
+            
         </header>
 
         <!-- Cart -->
@@ -319,11 +320,11 @@
                         </div>
 
                         <div class="header-cart-buttons flex-w w-full">
-                            <a href="shoping-cart.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                            <a href="shopingcart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                                 View Cart
                             </a>
 
-                            <a href="shoping-cart.jsp" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                            <a href="shopingcart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                                 Check Out
                             </a>
                         </div>
