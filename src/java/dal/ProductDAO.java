@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 import model.Categories;
 import model.Products;
+import model.Size;
 
 /**
  *
@@ -329,9 +330,137 @@ public class ProductDAO extends DBContext {
         }
     }
 
+    public List<Size> getAllSize() {
+        List<Size> list = new ArrayList<>();
+        String sql = "select * from Size ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Size size = new Size(rs.getString("size"), rs.getString("description"));
+                list.add(size);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void insertSize(Size s) {
+        String sql = "INSERT INTO [dbo].[Size]\n"
+                + "           ([size]\n"
+                + "           ,[description])\n"
+                + "     VALUES\n"
+                + "           (?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, s.getSize());
+            st.setString(2, s.getDescription());
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public List<Integer> getAllProductIdByCategoryId(int categoryId) {
+        List<Integer> list = new ArrayList<>();
+        ProductDAO d = new ProductDAO();
+        String sql = "select p.productId \n"
+                + "from Products p, Categories c\n"
+                + "where p.categoryID=c.categoryID and c.categoryID=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, categoryId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getInt("productId"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void insertSizeProduct(String size, int productId) {
+        String sql = "INSERT INTO [dbo].[Size_Product]\n"
+                + "           ([size]\n"
+                + "           ,[productID]\n"
+                + "           ,[quantity])\n"
+                + "     VALUES\n"
+                + "           (?,?,?)";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, size);
+            st.setInt(2, productId);
+            st.setInt(3, 100);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void deleteSize(String size) {
+        String sql2 = "DELETE FROM [dbo].[Size_Product]\n"
+                + "      WHERE size=?";
+        String sql = "DELETE FROM [dbo].[Size]\n"
+                + "      WHERE size =?";
+        try {
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+            st2.setString(1, size);
+            st2.executeUpdate();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, size);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public String getDescription(String size) {
+        String sql = "select description from Size where size =?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, size);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return rs.getString("description");
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return "";
+    }
+
+    public void updateSize(String sizeOld, String sizeNew, String description) {
+        String sql = "UPDATE [dbo].[Size]\n"
+                + "   SET [size] = ?\n"
+                + "      ,[description] = ?\n"
+                + " WHERE size = ?";
+        String sql2 = "UPDATE [dbo].[Size_Product]\n"
+                + "   SET [size] = ?"
+                + " WHERE size = ?";
+        try {
+            ProductDAO d = new ProductDAO();
+            //insert new size
+            Size s = new Size(sizeNew, description);
+            d.insertSize(s);
+            //change size name
+            PreparedStatement st2 = connection.prepareStatement(sql2);
+            st2.setString(1, sizeNew);
+            st2.setString(2, sizeOld);
+            st2.executeUpdate();
+            //delete old size
+            d.deleteSize(sizeOld);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     public static void main(String[] args) {
         ProductDAO p = new ProductDAO();
-        Products product = p.getProductById(2);
-        System.out.println(product.getNameProduct());
+        List<Size> list = p.getAllSize();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i).getSize());
+        }
     }
 }

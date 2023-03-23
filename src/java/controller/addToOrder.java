@@ -4,6 +4,7 @@
  */
 package controller;
 
+import EmailSender.EmailSender;
 import dal.CartDAO;
 import dal.OrderDAO;
 import dal.ProductDAO;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import model.Cart;
 import model.Customers;
@@ -69,7 +71,7 @@ public class addToOrder extends HttpServlet {
             throws ServletException, IOException {
         String discount_raw = request.getParameter("discountTotal");
         int discount = Integer.parseInt(discount_raw);
-
+        String email = request.getParameter("email");
         String customerName = request.getParameter("name");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
@@ -102,6 +104,7 @@ public class addToOrder extends HttpServlet {
         oDAO.insertOrder(order);
 
         //insert orderdetails
+        List<OrderDetails> listOrders = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             OrderDetails orderDetail = new OrderDetails();
             orderDetail.setOrderId(oDAO.getOrderIdByCustomerId(customer.getCustomerId()));
@@ -112,8 +115,11 @@ public class addToOrder extends HttpServlet {
             orderDetail.setQuantity(quantity);
             orderDetail.setSize(size);
             oDAO.insertOrderDetails(orderDetail);
+            listOrders.add(orderDetail);
         }
         cartDAO.deleteAll(cartId);
+        EmailSender e = new EmailSender();
+        e.send(email, customerName, total,listOrders,discount);
         request.setAttribute("orderSuccess", "Success! We will contact to you soon");
         request.getRequestDispatcher("shopingcart").forward(request, response);
     }

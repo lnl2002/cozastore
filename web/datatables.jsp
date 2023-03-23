@@ -41,29 +41,19 @@
         <div id="wrapper">
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard.jsp">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
                     <div class="sidebar-brand-icon">
                         <img src="images/icons/logo-02.png" >
                     </div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="dashboard.jsp">
+                    <a class="nav-link" href="dashboard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
                 <hr class="sidebar-divider">
-
-
-
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="simple-tables.jsp">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Simple Tables</span>
-                    </a>
-                </li>
+               
                 <li class="nav-item">
                     <a class="nav-link" href="datatables.jsp">
                         <i class="fas fa-fw fa-chart-area"></i>
@@ -71,12 +61,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="charts.jsp">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span>
-                    </a>
-                </li>
+                
                 <hr class="sidebar-divider">
                 <div class="version" id="version-ruangadmin"></div>
             </ul>
@@ -155,6 +140,46 @@
                                                             </div>
                                                             <div class="update-delete" style="background-color: red">
                                                                 <a onclick="doDelete2('${c.categoryId}')" ><ion-icon name="trash-sharp"></ion-icon></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                </c:forEach>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="card mb-4">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Size</h6>
+                                        <h6 class="m-0 font-weight-bold text-primary"> <a href="addsize" style="font-size: 30px; cursor: pointer"><ion-icon name="add-circle-sharp"></ion-icon> </a> </h6>
+                                    </div>
+
+                                    <div class="table-responsive p-3">
+                                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <th>Description</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <c:forEach items="${requestScope.sizes}" var="s">
+                                                    <tr>
+                                                        <td>${s.size}</td>
+                                                        <td>${s.description}</td>
+                                                        <td>
+                                                            <div class="update-delete" style="background-color: #ffb848">
+                                                                <a href="updatesize?size=${s.size}" ><ion-icon name="construct-sharp"></ion-icon></a>
+                                                            </div>
+                                                            <div class="update-delete" style="background-color: red">
+                                                                <a onclick="doDelete3('${s.size}')" ><ion-icon name="trash-sharp"></ion-icon></a>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -274,6 +299,11 @@
             function doDelete2(id) {
                 if (confirm("Do you want delete " + id + " ?")) {
                     window.location = "deletecategory?id=" + id;
+                }
+            }
+            function doDelete3(size) {
+                if (confirm("Do you want delete " + size + " ?")) {
+                    window.location = "deletesize?size=" + size;
                 }
             }
         </script>

@@ -397,7 +397,7 @@
 	
 	<!-- Map -->
 	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
+		<div class="size-303" id="google_map" data-map-x="21.013450292711735" data-map-y=" 105.52699992487803" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="17"></div>
 	</div>
 
 
@@ -592,7 +592,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		});
 	</script>
 <!--===============================================================================================-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBp-xvSE7HCqLgo885vhcRw05UAVnwi-qs"></script>
 	<script src="js/map-custom.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>

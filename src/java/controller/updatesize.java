@@ -5,9 +5,7 @@
 
 package controller;
 
-import dal.AccountDAO;
-import dal.CartDAO;
-import dal.CustomerDAO;
+import dal.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,18 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Accounts;
-import model.Cart;
-import model.Customers;
 
 /**
  *
  * @author Nhat Anh
  */
-@WebServlet(name="login", urlPatterns={"/login"})
-public class login extends HttpServlet {
+@WebServlet(name="updatesize", urlPatterns={"/updatesize"})
+public class updatesize extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -43,10 +36,10 @@ public class login extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet login</title>");  
+            out.println("<title>Servlet updatesize</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet updatesize at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,7 +56,12 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        ProductDAO d = new ProductDAO();
+        String size = request.getParameter("size");
+        String description = d.getDescription(size);
+        request.setAttribute("size", size);
+        request.setAttribute("description", description);
+        request.getRequestDispatcher("updateSize.jsp").forward(request, response);
     } 
 
     /** 
@@ -76,35 +74,18 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        HttpSession session = request.getSession();
-        AccountDAO d = new AccountDAO();
-        CustomerDAO cusDAO = new CustomerDAO();
-        CartDAO cartDAO = new CartDAO();
-        if(d.isAccount(username, password)){
-            if(!d.isAdmin(username, password)){
-                Accounts account = new Accounts(d.getAccountIdByUsername(username), username, password);
-                session.setAttribute("account", account);
-                session.setAttribute("username", account.getUserName());
-                Customers customer = cusDAO.getCustomerByAccountID(account.getAccountID());
-                int cartId = cartDAO.getCartIdByAccountId(account.getAccountID());
-                List<Cart> cart = cartDAO.getListProductById(cartId);
-                session.setAttribute("cartId", cartId);
-                session.setAttribute("customer", customer);
-              
-                response.sendRedirect("index");
-            }
-            else if(d.isAdmin(username, password)){
-                Accounts account = new Accounts(d.getAccountIdByUsername(username), username, password);
-                session.setAttribute("account", account);
-                session.setAttribute("username", account.getUserName());
-                response.sendRedirect("dashboard");
-            }
-        } else {
-            request.setAttribute("fail", "flex");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
+        String sizeOld=request.getParameter("sizeOld");
+        String sizeNew = request.getParameter("sizeNew");
+        String description = request.getParameter("description");
+        ProductDAO d = new ProductDAO();
+        d.updateSize(sizeOld, sizeNew, description);
+        String message = "Added successfully";
+        String color = "#00dfc4";
+        request.setAttribute("size", sizeNew);
+        request.setAttribute("description", description);
+        request.setAttribute("color", color);
+        request.setAttribute("message", message);
+        request.getRequestDispatcher("updateSize.jsp").forward(request, response);
     }
 
     /** 
