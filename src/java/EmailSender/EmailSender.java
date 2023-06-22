@@ -31,8 +31,8 @@ public class EmailSender {
             listProduct += "\n"+d.getProductById(productId).getNameProduct()+"\t\tQuanity: " +quantity +"\t\tTOTAL: "+f.format(totalProduct);
         }
         
-        final String username = "lamlnhe161656@fpt.edu.vn";
-        final String password = "lnl412204";
+        final String username = "";
+        final String password = "";
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
